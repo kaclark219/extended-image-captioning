@@ -1,0 +1,9 @@
+torch>=2.1
+transformers>=4.45
+accelerate>=0.28
+datasets>=2.18
+huggingface_hub>=0.22
+qwen-vl-utils
+Pillow
+tqdm
+torchvision>=0.16
