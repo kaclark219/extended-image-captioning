@@ -1,0 +1,63 @@
+Sureal CNN-LSTM
+
+1st Run [DONE]
+python training/train_sureal01_cnn_lstm.py \
+  --output_dir checkpoints/sureal01-cnn-lstm \
+  --epochs 2 \
+  --batch_size 8 \
+  --max_len 256 \
+  --train_end_pct 5 \
+  --val_end_pct 25
+
+2nd Run
+python training/train_sureal01_cnn_lstm.py \
+  --output_dir checkpoints/sureal01-cnn-lstm \
+  --resume_from checkpoints/sureal01-cnn-lstm/last.pt \
+  --epochs 2 \
+  --batch_size 8 \
+  --max_len 256 \
+  --train_end_pct 10 \
+  --val_end_pct 25
+
+3rd Run
+python training/train_sureal01_cnn_lstm.py \
+  --output_dir checkpoints/sureal01-cnn-lstm \
+  --resume_from checkpoints/sureal01-cnn-lstm/last.pt \
+  --epochs 2 \
+  --batch_size 8 \
+  --max_len 256 \
+  --train_end_pct 25 \
+  --val_end_pct 25
+
+
+
+Simple CNN-LSTM
+
+1st Run [DONE]
+python training/train_cnn_lstm.py \
+  --output_dir checkpoints/simple-cnn-lstm \
+  --epochs 2 \
+  --batch_size 16 \
+  --max_len 256 \
+  --train_end_pct 10 \
+  --val_end_pct 25
+
+2nd Run [DONE]
+python training/train_cnn_lstm.py \
+  --output_dir checkpoints/simple-cnn-lstm \
+  --resume_from checkpoints/simple-cnn-lstm/last.pt \
+  --epochs 2 \
+  --batch_size 16 \
+  --max_len 256 \
+  --train_end_pct 50 \
+  --val_end_pct 25
+
+3rd Run
+python training/train_cnn_lstm.py \
+  --output_dir checkpoints/simple-cnn-lstm \
+  --resume_from checkpoints/simple-cnn-lstm/last.pt \
+  --epochs 2 \
+  --batch_size 16 \
+  --max_len 256 \
+  --train_end_pct 100 \
+  --val_end_pct 25

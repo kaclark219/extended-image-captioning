@@ -3,6 +3,7 @@ import os
 import random
 import re
 from collections import Counter
+from typing import Optional
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -26,6 +27,51 @@ def set_seed(seed: int):
 def tokenize(text: str):
     """Tokenize a text string."""
     return re.findall(r"[a-z0-9']+", text.lower())
+
+
+def parse_stage_range(start_pct: float = 0.0, end_pct: float = 100.0):
+    """Validate and normalize a percentage range."""
+    start_pct = max(0.0, min(100.0, start_pct))
+    end_pct = max(0.0, min(100.0, end_pct))
+    if end_pct < start_pct:
+        raise ValueError("end_pct must be greater than or equal to start_pct")
+    return start_pct / 100.0, end_pct / 100.0
+
+
+def load_split_rows(dataset_name: str, split: str):
+    """Load a dataset split into memory to take deterministic staged slices."""
+    return list(load_dataset(dataset_name, split=split))
+
+
+def select_rows_by_percentage(rows, start_pct: float = 0.0, end_pct: float = 100.0):
+    """Select a contiguous percentage range from a list of rows."""
+    start_ratio, end_ratio = parse_stage_range(start_pct, end_pct)
+    total_rows = len(rows)
+    start_idx = int(total_rows * start_ratio)
+    end_idx = int(total_rows * end_ratio)
+
+    if end_pct > start_pct:
+        end_idx = max(end_idx, start_idx + 1)
+
+    return rows[start_idx:end_idx]
+
+
+def build_caption_texts(dataset_name: str, split: str, limit_images: int = 0, start_pct: float = 0.0, end_pct: float = 100.0):
+    """Build just the caption texts for vocabulary construction."""
+    rows = load_split_rows(dataset_name, split)
+    rows = select_rows_by_percentage(rows, start_pct=start_pct, end_pct=end_pct)
+
+    if limit_images:
+        rows = rows[:limit_images]
+
+    captions = []
+    for row in rows:
+        for col in CAPTION_COLUMNS:
+            caption = row.get(col)
+            if caption:
+                captions.append(caption)
+
+    return captions
 
 
 # simple vocab class for tokenizing text
@@ -104,12 +150,13 @@ class Vocabulary:
         return vocab
 
 
-def build_caption_pairs(dataset_name: str, split: str, limit_images: int = 0):
+def build_caption_pairs(dataset_name: str, split: str, limit_images: int = 0, start_pct: float = 0.0, end_pct: float = 100.0, rows: Optional[list] = None):
     """Build caption pairs from a dataset."""
-    dataset = load_dataset(dataset_name, split=split)
+    dataset_rows = rows if rows is not None else load_split_rows(dataset_name, split)
+    dataset_rows = select_rows_by_percentage(dataset_rows, start_pct=start_pct, end_pct=end_pct)
     pairs = []
 
-    for idx, row in enumerate(dataset):
+    for idx, row in enumerate(dataset_rows):
         if limit_images and idx >= limit_images:
             break
         image = row["image"].convert("RGB")
@@ -327,10 +374,35 @@ def run_epoch(model, loader, optimizer, device, pad_id: int, train: bool):
     return total_loss / max(1, total_items)
 
 
-def make_loaders(dataset_name: str, vocab: Vocabulary, image_size: int, max_len: int, batch_size: int, train_limit_images: int = 0, val_limit_images: int = 0, num_workers: int = 2):
+def make_loaders(
+    dataset_name: str,
+    vocab: Vocabulary,
+    image_size: int,
+    max_len: int,
+    batch_size: int,
+    train_limit_images: int = 0,
+    val_limit_images: int = 0,
+    num_workers: int = 2,
+    train_start_pct: float = 0.0,
+    train_end_pct: float = 100.0,
+    val_start_pct: float = 0.0,
+    val_end_pct: float = 100.0,
+):
     """Create data loaders for training & validation."""
-    train_pairs = build_caption_pairs(dataset_name, "train", limit_images=train_limit_images)
-    val_pairs = build_caption_pairs(dataset_name, "validation", limit_images=val_limit_images)
+    train_pairs = build_caption_pairs(
+        dataset_name,
+        "train",
+        limit_images=train_limit_images,
+        start_pct=train_start_pct,
+        end_pct=train_end_pct,
+    )
+    val_pairs = build_caption_pairs(
+        dataset_name,
+        "validation",
+        limit_images=val_limit_images,
+        start_pct=val_start_pct,
+        end_pct=val_end_pct,
+    )
 
     train_dataset = CaptionDataset(train_pairs, vocab, image_size=image_size, max_len=max_len, train=True)
     val_dataset = CaptionDataset(val_pairs, vocab, image_size=image_size, max_len=max_len, train=False)
