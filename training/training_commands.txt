@@ -19,7 +19,7 @@ python training/train_sureal01_cnn_lstm.py \
   --train_end_pct 10 \
   --val_end_pct 25
 
-3rd Run
+3rd Run [DONE]
 python training/train_sureal01_cnn_lstm.py \
   --output_dir checkpoints/sureal01-cnn-lstm \
   --resume_from checkpoints/sureal01-cnn-lstm/last.pt \
