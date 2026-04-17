@@ -3,5 +3,5 @@ __pycache__/
 .venv/
 venv/
 env/
-checkpoints/blip-base/*.pt
-checkpoints/vit-gpt2/*.pt
+checkpoints/**/*.pt
+downloaded-checkpoints/
