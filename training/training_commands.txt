@@ -217,7 +217,7 @@ python training/train_blip.py \
   --train_end_pct 80 \
   --val_end_pct 25
 
-6th Run
+6th Run [DONE]
 python training/train_blip.py \
   --output_dir checkpoints/blip-base \
   --resume_from checkpoints/blip-base/last.pt \
