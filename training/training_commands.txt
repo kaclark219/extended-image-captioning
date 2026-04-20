@@ -29,6 +29,46 @@ python training/train_sureal01_cnn_lstm.py \
   --train_end_pct 25 \
   --val_end_pct 25
 
+4th Run [DONE]
+python training/train_sureal01_cnn_lstm.py \
+  --output_dir checkpoints/sureal01-cnn-lstm \
+  --resume_from checkpoints/sureal01-cnn-lstm/last.pt \
+  --epochs 2 \
+  --batch_size 8 \
+  --max_len 256 \
+  --train_end_pct 40 \
+  --val_end_pct 25
+
+5th Run [DONE]
+python training/train_sureal01_cnn_lstm.py \
+  --output_dir checkpoints/sureal01-cnn-lstm \
+  --resume_from checkpoints/sureal01-cnn-lstm/last.pt \
+  --epochs 1 \
+  --batch_size 8 \
+  --max_len 256 \
+  --train_end_pct 60 \
+  --val_end_pct 25
+
+6th Run
+python training/train_sureal01_cnn_lstm.py \
+  --output_dir checkpoints/sureal01-cnn-lstm \
+  --resume_from checkpoints/sureal01-cnn-lstm/last.pt \
+  --epochs 1 \
+  --batch_size 8 \
+  --max_len 256 \
+  --train_end_pct 80 \
+  --val_end_pct 25
+
+7th Run
+python training/train_sureal01_cnn_lstm.py \
+  --output_dir checkpoints/sureal01-cnn-lstm \
+  --resume_from checkpoints/sureal01-cnn-lstm/last.pt \
+  --epochs 1 \
+  --batch_size 8 \
+  --max_len 256 \
+  --train_end_pct 100 \
+  --val_end_pct 25
+
 
 Simple CNN-LSTM
 
@@ -94,6 +134,36 @@ python training/train_vit_gpt2.py \
   --train_end_pct 40 \
   --val_end_pct 25
 
+4th Run [DONE]
+python training/train_vit_gpt2.py \
+  --output_dir checkpoints/vit-gpt2 \
+  --resume_from checkpoints/vit-gpt2/last.pt \
+  --epochs 1 \
+  --batch_size 4 \
+  --max_len 64 \
+  --train_end_pct 60 \
+  --val_end_pct 25
+
+5th Run [DONE]
+python training/train_vit_gpt2.py \
+  --output_dir checkpoints/vit-gpt2 \
+  --resume_from checkpoints/vit-gpt2/last.pt \
+  --epochs 1 \
+  --batch_size 4 \
+  --max_len 64 \
+  --train_end_pct 80 \
+  --val_end_pct 25
+
+6th Run [DONE]
+python training/train_vit_gpt2.py \
+  --output_dir checkpoints/vit-gpt2 \
+  --resume_from checkpoints/vit-gpt2/last.pt \
+  --epochs 1 \
+  --batch_size 4 \
+  --max_len 64 \
+  --train_end_pct 100 \
+  --val_end_pct 25
+
 
 
 BLIP Transformer
@@ -125,4 +195,34 @@ python training/train_blip.py \
   --batch_size 4 \
   --max_len 64 \
   --train_end_pct 40 \
+  --val_end_pct 25
+
+4th Run [DONE]
+python training/train_blip.py \
+  --output_dir checkpoints/blip-base \
+  --resume_from checkpoints/blip-base/last.pt \
+  --epochs 1 \
+  --batch_size 4 \
+  --max_len 64 \
+  --train_end_pct 60 \
+  --val_end_pct 25
+
+5th Run [DONE]
+python training/train_blip.py \
+  --output_dir checkpoints/blip-base \
+  --resume_from checkpoints/blip-base/last.pt \
+  --epochs 1 \
+  --batch_size 4 \
+  --max_len 64 \
+  --train_end_pct 80 \
+  --val_end_pct 25
+
+6th Run
+python training/train_blip.py \
+  --output_dir checkpoints/blip-base \
+  --resume_from checkpoints/blip-base/last.pt \
+  --epochs 1 \
+  --batch_size 4 \
+  --max_len 64 \
+  --train_end_pct 100 \
   --val_end_pct 25
