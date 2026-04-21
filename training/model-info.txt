@@ -1,0 +1,90 @@
+=== Simple CNN-LSTM ===
+family: CNN encoder + single-stream LSTM decoder
+total_params: 17,416,129
+trainable_params: 6,239,617
+encoder_arch: resnet18
+encoder_feature_dim: 512
+encoder_pooled_output: True
+encoder_trainable_layers: 0
+decoder_embedding_dim: 256
+decoder_hidden_dim: 256
+decoder_dropout: 0.2
+vocab_size: 10881
+max_caption_len: 128
+image_size: 224
+encoder_total_params: 11176512
+encoder_trainable_params: 0
+decoder_total_params: 6239617
+decoder_trainable_params: 6239617
+decoder_conditioning: Image feature is projected once and prepended as the first LSTM token.
+
+=== Sureal01 CNN-LSTM ===
+family: CNN encoder + feature-conditioned LSTMCell decoder
+total_params: 40,171,713
+trainable_params: 16,663,681
+encoder_arch: resnet50
+encoder_feature_dim: 2048
+encoder_pooled_output: True
+encoder_trainable_layers: 1
+decoder_embedding_dim: 512
+decoder_hidden_dim: 512
+decoder_dropout: 0.3
+vocab_size: 10881
+max_caption_len: 128
+image_size: 224
+encoder_total_params: 23508032
+encoder_trainable_params: 0
+decoder_total_params: 16663681
+decoder_trainable_params: 16663681
+decoder_conditioning: Image feature is concatenated with each word embedding at every decoding step.
+
+=== ViT-GPT2 ===
+family: Transformer encoder-decoder (vision encoder + causal LM decoder)
+total_params: 239,195,904
+trainable_params: 239,195,904
+model_id: nlpconnect/vit-gpt2-image-captioning
+vision_model_type: vit
+vision_hidden_size: 768
+vision_num_hidden_layers: 12
+vision_num_attention_heads: 12
+vision_intermediate_size: 3072
+vision_image_size: 224
+vision_patch_size: 16
+text_model_type: gpt2
+text_hidden_size: 768
+text_num_hidden_layers: 12
+text_num_attention_heads: 12
+text_vocab_size: 50257
+text_max_positions: 1024
+tokenizer_vocab_size: 50257
+processor_image_size: SizeDict(height=224, width=224, longest_edge=None, shortest_edge=None, max_height=None, max_width=None)
+encoder_total_params: 86389248
+encoder_trainable_params: 86389248
+decoder_total_params: 152806656
+decoder_trainable_params: 152806656
+decoder_conditioning: Cross-attention from GPT-2 decoder into ViT encoder states.
+
+=== BLIP ===
+family: Bootstrapped language-image pretraining captioning model
+total_params: 223,971,644
+trainable_params: 223,971,644
+model_id: Salesforce/blip-image-captioning-base
+vision_hidden_size: 768
+vision_num_hidden_layers: 12
+vision_num_attention_heads: 12
+vision_intermediate_size: 3072
+vision_image_size: 384
+vision_patch_size: 16
+text_hidden_size: 768
+text_num_hidden_layers: 12
+text_num_attention_heads: 12
+text_intermediate_size: 3072
+text_vocab_size: 30524
+text_max_positions: 512
+processor_image_size: SizeDict(height=384, width=384, longest_edge=None, shortest_edge=None, max_height=None, max_width=None)
+tokenizer_vocab_size: 30522
+vision_total_params: 86090496
+vision_trainable_params: 86090496
+text_total_params: 137881148
+text_trainable_params: 137881148
+decoder_conditioning: Text decoder attends to visual embeddings produced by BLIP's vision encoder.
