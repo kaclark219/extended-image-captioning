@@ -102,234 +102,6 @@ python training/train_cnn_lstm.py \
   --val_end_pct 25
 
 
-Simple CNN-LSTM Baseline (original Flickr8k)
-
-1st Run
-python training/train_simple_cnn_lstm_baseline.py \
-  --output_dir checkpoints/simple-cnn-lstm-baseline \
-  --epochs 2 \
-  --batch_size 16 \
-  --max_len 256 \
-  --train_end_pct 10 \
-  --val_end_pct 25
-
-2nd Run
-python training/train_simple_cnn_lstm_baseline.py \
-  --output_dir checkpoints/simple-cnn-lstm-baseline \
-  --resume_from checkpoints/simple-cnn-lstm-baseline/last.pt \
-  --epochs 2 \
-  --batch_size 16 \
-  --max_len 256 \
-  --train_end_pct 50 \
-  --val_end_pct 25
-
-3rd Run
-python training/train_simple_cnn_lstm_baseline.py \
-  --output_dir checkpoints/simple-cnn-lstm-baseline \
-  --resume_from checkpoints/simple-cnn-lstm-baseline/last.pt \
-  --epochs 2 \
-  --batch_size 16 \
-  --max_len 256 \
-  --train_end_pct 100 \
-  --val_end_pct 25
-
-
-Sureal CNN-LSTM Baseline (original Flickr8k)
-
-1st Run
-python training/train_sureal01_cnn_lstm_baseline.py \
-  --output_dir checkpoints/sureal01-cnn-lstm-baseline \
-  --epochs 2 \
-  --batch_size 8 \
-  --max_len 256 \
-  --train_end_pct 5 \
-  --val_end_pct 25
-
-2nd Run
-python training/train_sureal01_cnn_lstm_baseline.py \
-  --output_dir checkpoints/sureal01-cnn-lstm-baseline \
-  --resume_from checkpoints/sureal01-cnn-lstm-baseline/last.pt \
-  --epochs 2 \
-  --batch_size 8 \
-  --max_len 256 \
-  --train_end_pct 10 \
-  --val_end_pct 25
-
-3rd Run
-python training/train_sureal01_cnn_lstm_baseline.py \
-  --output_dir checkpoints/sureal01-cnn-lstm-baseline \
-  --resume_from checkpoints/sureal01-cnn-lstm-baseline/last.pt \
-  --epochs 2 \
-  --batch_size 8 \
-  --max_len 256 \
-  --train_end_pct 25 \
-  --val_end_pct 25
-
-4th Run
-python training/train_sureal01_cnn_lstm_baseline.py \
-  --output_dir checkpoints/sureal01-cnn-lstm-baseline \
-  --resume_from checkpoints/sureal01-cnn-lstm-baseline/last.pt \
-  --epochs 2 \
-  --batch_size 8 \
-  --max_len 256 \
-  --train_end_pct 40 \
-  --val_end_pct 25
-
-5th Run
-python training/train_sureal01_cnn_lstm_baseline.py \
-  --output_dir checkpoints/sureal01-cnn-lstm-baseline \
-  --resume_from checkpoints/sureal01-cnn-lstm-baseline/last.pt \
-  --epochs 1 \
-  --batch_size 8 \
-  --max_len 256 \
-  --train_end_pct 60 \
-  --val_end_pct 25
-
-6th Run
-python training/train_sureal01_cnn_lstm_baseline.py \
-  --output_dir checkpoints/sureal01-cnn-lstm-baseline \
-  --resume_from checkpoints/sureal01-cnn-lstm-baseline/last.pt \
-  --epochs 1 \
-  --batch_size 8 \
-  --max_len 256 \
-  --train_end_pct 80 \
-  --val_end_pct 25
-
-7th Run
-python training/train_sureal01_cnn_lstm_baseline.py \
-  --output_dir checkpoints/sureal01-cnn-lstm-baseline \
-  --resume_from checkpoints/sureal01-cnn-lstm-baseline/last.pt \
-  --epochs 1 \
-  --batch_size 8 \
-  --max_len 256 \
-  --train_end_pct 100 \
-  --val_end_pct 25
-
-
-ViT-GPT2 Transformer Baseline (original Flickr8k)
-
-1st Run
-python training/train_vit_gpt2_baseline.py \
-  --output_dir checkpoints/vit-gpt2-baseline \
-  --epochs 1 \
-  --batch_size 4 \
-  --max_len 64 \
-  --train_end_pct 5 \
-  --val_end_pct 25
-
-2nd Run
-python training/train_vit_gpt2_baseline.py \
-  --output_dir checkpoints/vit-gpt2-baseline \
-  --resume_from checkpoints/vit-gpt2-baseline/last.pt \
-  --epochs 1 \
-  --batch_size 4 \
-  --max_len 64 \
-  --train_end_pct 15 \
-  --val_end_pct 25
-
-3rd Run
-python training/train_vit_gpt2_baseline.py \
-  --output_dir checkpoints/vit-gpt2-baseline \
-  --resume_from checkpoints/vit-gpt2-baseline/last.pt \
-  --epochs 1 \
-  --batch_size 4 \
-  --max_len 64 \
-  --train_end_pct 40 \
-  --val_end_pct 25
-
-4th Run
-python training/train_vit_gpt2_baseline.py \
-  --output_dir checkpoints/vit-gpt2-baseline \
-  --resume_from checkpoints/vit-gpt2-baseline/last.pt \
-  --epochs 1 \
-  --batch_size 4 \
-  --max_len 64 \
-  --train_end_pct 60 \
-  --val_end_pct 25
-
-5th Run
-python training/train_vit_gpt2_baseline.py \
-  --output_dir checkpoints/vit-gpt2-baseline \
-  --resume_from checkpoints/vit-gpt2-baseline/last.pt \
-  --epochs 1 \
-  --batch_size 4 \
-  --max_len 64 \
-  --train_end_pct 80 \
-  --val_end_pct 25
-
-6th Run
-python training/train_vit_gpt2_baseline.py \
-  --output_dir checkpoints/vit-gpt2-baseline \
-  --resume_from checkpoints/vit-gpt2-baseline/last.pt \
-  --epochs 1 \
-  --batch_size 4 \
-  --max_len 64 \
-  --train_end_pct 100 \
-  --val_end_pct 25
-
-
-BLIP Transformer Baseline (original Flickr8k)
-
-1st Run
-python training/train_blip_baseline.py \
-  --output_dir checkpoints/blip-base-baseline \
-  --epochs 1 \
-  --batch_size 4 \
-  --max_len 64 \
-  --train_end_pct 5 \
-  --val_end_pct 25
-
-2nd Run
-python training/train_blip_baseline.py \
-  --output_dir checkpoints/blip-base-baseline \
-  --resume_from checkpoints/blip-base-baseline/last.pt \
-  --epochs 1 \
-  --batch_size 4 \
-  --max_len 64 \
-  --train_end_pct 15 \
-  --val_end_pct 25
-
-3rd Run
-python training/train_blip_baseline.py \
-  --output_dir checkpoints/blip-base-baseline \
-  --resume_from checkpoints/blip-base-baseline/last.pt \
-  --epochs 1 \
-  --batch_size 4 \
-  --max_len 64 \
-  --train_end_pct 40 \
-  --val_end_pct 25
-
-4th Run
-python training/train_blip_baseline.py \
-  --output_dir checkpoints/blip-base-baseline \
-  --resume_from checkpoints/blip-base-baseline/last.pt \
-  --epochs 1 \
-  --batch_size 4 \
-  --max_len 64 \
-  --train_end_pct 60 \
-  --val_end_pct 25
-
-5th Run
-python training/train_blip_baseline.py \
-  --output_dir checkpoints/blip-base-baseline \
-  --resume_from checkpoints/blip-base-baseline/last.pt \
-  --epochs 1 \
-  --batch_size 4 \
-  --max_len 64 \
-  --train_end_pct 80 \
-  --val_end_pct 25
-
-6th Run
-python training/train_blip_baseline.py \
-  --output_dir checkpoints/blip-base-baseline \
-  --resume_from checkpoints/blip-base-baseline/last.pt \
-  --epochs 1 \
-  --batch_size 4 \
-  --max_len 64 \
-  --train_end_pct 100 \
-  --val_end_pct 25
-
-
 
 ViT-GPT2 Transformer
 
@@ -452,5 +224,93 @@ python training/train_blip.py \
   --epochs 1 \
   --batch_size 4 \
   --max_len 64 \
+  --train_end_pct 100 \
+  --val_end_pct 25
+
+
+
+--- BASELINES ---
+1st Run [DONE]
+python training/train_simple_cnn_lstm_baseline.py \
+  --output_dir checkpoints/simple-cnn-lstm-baseline \
+  --epochs 2 \
+  --batch_size 16 \
+  --max_len 32 \
+  --train_end_pct 50 \
+  --val_end_pct 25
+2nd Run [DONE]
+python training/train_simple_cnn_lstm_baseline.py \
+  --output_dir checkpoints/simple-cnn-lstm-baseline \
+  --epochs 2 \
+  --batch_size 16 \
+  --max_len 32 \
+  --train_end_pct 100 \
+  --val_end_pct 25
+
+1st Run
+1st Run [DONE]
+python training/train_sureal01_cnn_lstm_baseline.py \
+  --output_dir checkpoints/sureal01-cnn-lstm-baseline \
+  --epochs 1 \
+  --batch_size 8 \
+  --max_len 32 \
+  --train_end_pct 40 \
+  --val_end_pct 25
+2nd Run [DONE]
+python training/train_sureal01_cnn_lstm_baseline.py \
+  --output_dir checkpoints/sureal01-cnn-lstm-baseline \
+  --epochs 1 \
+  --batch_size 8 \
+  --max_len 32 \
+  --train_end_pct 60 \
+  --val_end_pct 25
+
+1st Run [DONE]
+python training/train_vit_gpt2_baseline.py \
+  --output_dir checkpoints/vit-gpt2-baseline \
+  --epochs 1 \
+  --batch_size 4 \
+  --max_len 32 \
+  --train_end_pct 50 \
+  --val_end_pct 25
+2nd Run [DONE]
+python training/train_vit_gpt2_baseline.py \
+  --output_dir checkpoints/vit-gpt2-baseline \
+  --epochs 1 \
+  --batch_size 4 \
+  --max_len 32 \
+  --train_end_pct 75 \
+  --val_end_pct 25
+3rd Run [DONE]
+python training/train_vit_gpt2_baseline.py \
+  --output_dir checkpoints/vit-gpt2-baseline \
+  --epochs 1 \
+  --batch_size 4 \
+  --max_len 32 \
+  --train_end_pct 100 \
+  --val_end_pct 25
+
+1st Run [DONE]
+python training/train_blip_baseline.py \
+  --output_dir checkpoints/blip-base-baseline \
+  --epochs 1 \
+  --batch_size 4 \
+  --max_len 32 \
+  --train_end_pct 50 \
+  --val_end_pct 25
+2nd Run [DONE]
+python training/train_blip_baseline.py \
+  --output_dir checkpoints/blip-base-baseline \
+  --epochs 1 \
+  --batch_size 4 \
+  --max_len 32 \
+  --train_end_pct 75 \
+  --val_end_pct 25
+3rd Run [DONE]
+python training/train_blip_baseline.py \
+  --output_dir checkpoints/blip-base-baseline \
+  --epochs 1 \
+  --batch_size 4 \
+  --max_len 32 \
   --train_end_pct 100 \
   --val_end_pct 25
