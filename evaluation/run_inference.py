@@ -61,17 +61,21 @@ VARIANTS = {
         "out_folder": "flickr8k",
     },
 }
-
 # ── standard caption length — intentionally kept short ───────────────────────
-# The research question is whether ENHANCED TRAINING improves STANDARD-LENGTH
-# outputs. We do NOT want to generate long captions here.
-MAX_NEW_TOKENS = 64
-CNN_MAX_LEN    = 64
+# Keep a shared short-caption ceiling across all inference paths.
+MAX_NEW_TOKENS = 24
+CNN_MAX_LEN    = 24
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # Model loaders
 # ═══════════════════════════════════════════════════════════════════════════════
+
+def load_trusted_checkpoint(checkpoint_path: str):
+    # These checkpoints are created by this repo's training scripts and include
+    # config/vocab metadata in addition to model weights.
+    return torch.load(checkpoint_path, map_location="cpu", weights_only=False)
+
 
 def load_blip(checkpoint_path: str):
     from transformers import BlipForConditionalGeneration, BlipProcessor
@@ -80,7 +84,7 @@ def load_blip(checkpoint_path: str):
     model     = BlipForConditionalGeneration.from_pretrained("Salesforce/blip-image-captioning-base")
     processor = BlipProcessor.from_pretrained("Salesforce/blip-image-captioning-base")
 
-    ckpt  = torch.load(checkpoint_path, map_location="cpu")
+    ckpt  = load_trusted_checkpoint(checkpoint_path)
     state = ckpt.get("model", ckpt)
     model.load_state_dict(state, strict=False)
     print(f"  Loaded: {checkpoint_path}")
@@ -103,7 +107,7 @@ def load_vit_gpt2(checkpoint_path: str):
     model.config.decoder_start_token_id = tokenizer.bos_token_id or tokenizer.eos_token_id
     model.config.eos_token_id         = tokenizer.eos_token_id
 
-    ckpt  = torch.load(checkpoint_path, map_location="cpu")
+    ckpt  = load_trusted_checkpoint(checkpoint_path)
     state = ckpt.get("model", ckpt)
     model.load_state_dict(state, strict=False)
     print(f"  Loaded: {checkpoint_path}")
@@ -119,7 +123,7 @@ def load_cnn_lstm(checkpoint_path: str, model_type: str):
     )
 
     print(f"  Loading {model_type} checkpoint...")
-    ckpt = torch.load(checkpoint_path, map_location="cpu")
+    ckpt = load_trusted_checkpoint(checkpoint_path)
     cfg  = ckpt.get("config", {})
 
     vocab   = Vocabulary.from_tokens(ckpt["vocab"])
@@ -283,6 +287,10 @@ def save_results(model_name, out_folder, captions):
     print(f"  Saved {len(captions)} captions → {out_path}")
 
 
+def results_path(model_name, out_folder):
+    return ROOT_DIR / "results" / model_name / out_folder / "captions.json"
+
+
 def load_test_split(data_source: str, split: str):
     source_path = ROOT_DIR / data_source
     if source_path.exists():
@@ -332,6 +340,11 @@ def main():
     for model_name in models_to_run:
         for variant in variants_to_run:
             spec = VARIANTS[variant]
+            out_path = results_path(model_name, spec["out_folder"])
+
+            if out_path.exists():
+                print(f"\n[SKIP] {model_name} ({variant}) — results already exist: {out_path}")
+                continue
 
             if args.checkpoint:
                 ckpt_path = Path(args.checkpoint)
