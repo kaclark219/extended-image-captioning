@@ -1,1 +1,50 @@
-{}
+{
+  "blip-base|flickr8k": {
+    "CIDEr": 94.42,
+    "BLEU-4": 31.47,
+    "METEOR": 48.32,
+    "ROUGE-L": 53.61
+  },
+  "blip-base|flickr8k-enhanced": {
+    "CIDEr": 8.84,
+    "BLEU-4": 6.31,
+    "METEOR": 19.32,
+    "ROUGE-L": 29.59
+  },
+  "vit-gpt2|flickr8k": {
+    "CIDEr": 61.63,
+    "BLEU-4": 23.5,
+    "METEOR": 39.77,
+    "ROUGE-L": 47.52
+  },
+  "vit-gpt2|flickr8k-enhanced": {
+    "CIDEr": 7.59,
+    "BLEU-4": 4.98,
+    "METEOR": 16.0,
+    "ROUGE-L": 27.7
+  },
+  "simple-cnn-lstm|flickr8k": {
+    "CIDEr": 7.28,
+    "BLEU-4": 0.0,
+    "METEOR": 14.41,
+    "ROUGE-L": 31.21
+  },
+  "simple-cnn-lstm|flickr8k-enhanced": {
+    "CIDEr": 0.86,
+    "BLEU-4": 0.0,
+    "METEOR": 4.24,
+    "ROUGE-L": 22.0
+  },
+  "sureal01-cnn-lstm|flickr8k": {
+    "CIDEr": 31.26,
+    "BLEU-4": 12.95,
+    "METEOR": 25.58,
+    "ROUGE-L": 38.91
+  },
+  "sureal01-cnn-lstm|flickr8k-enhanced": {
+    "CIDEr": 1.85,
+    "BLEU-4": 3.29,
+    "METEOR": 9.95,
+    "ROUGE-L": 23.15
+  }
+}
